@@ -17,7 +17,11 @@ else
     # echo "執行移除 public 下的 gitignore 程序 完成"
 
     echo "
+/node_modules/
 package-lock.json
-/dist
 " > $PUBLIC_GIT_IGNORE_PATH
+
+rm "$ABS_DIR/dist/.gitignore"
+
 fi
+
