@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>PressPlay Gmail 簽名檔產生器</title>
+    <meta name='author' content='Byron.Chen' />
+    <meta name='apple-mobile-web-app-title' content='Lucky Draw' />
+    <meta name='apple-mobile-web-app-capable' content='yes' />
+    <meta name='apple-touch-fullscreen' content='yes' />
+    <meta name='apple-mobile-web-app-status-bar-style' content='black' />
+    <meta name='mobile-web-app-capable' content='yes' />
+    <meta name='description' content='demo' />
+    <link rel="icon" href="./dist/img/pressplay/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./dist/css/page/page.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+    <script src="./dist/js/chunk/node_modules.bundle.js"></script>
+    <script src="./dist/js/chunk/vendor.bundle.js"></script>
+</head>
+<body>
+    <div id="appBox" cz-shortcut-listen="true">
+        <div class="container pb-5 pt-5">
+            <h2 class="mb-5">五步驟建立您的 PressPlay 簽名檔</h2>
+
+            <h3 class="mt-3 mb-3">1. 填寫您的基本資料</h3>
+
+            <div class="row">
+                <div class="col-12 col-md-4">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">事業體 <small>(必填)</small></label>
+                            <select class="form-control" v-model="group">
+                                <option v-for="(groupInfo, key) in groupSelector" :key="key" :value="key" v-text="groupInfo.name"></option>
+                            </select>
+                          </div>
+                        <div class="form-group">
+                            <label for="name">姓名 <small>(必填)</small></label>
+                            <input type="text" class="form-control" name="name" v-model="name" placeholder="請輸入您的中文或英文姓名">
+                        </div>
+                        <div class="form-group">
+                            <label for="jobTitle">職稱 <small>(必填)</small></label>
+                            <input type="text" class="form-control" name="jobTitle" v-model="jobTitle" placeholder="請輸入您的完整職稱">
+                        </div>
+                        <div class="form-group">
+                            <label for="extension">分機號碼 <small>(選填)</small></label>
+                            <input type="text" class="form-control" name="extension" v-model="extension" placeholder="請輸入您的分機號碼">
+                        </div>
+                        <div class="form-group">
+                            <label for="cellphone">手機 <small>(必填)</small></label>
+                            <input type="text" class="form-control" name="cellphone" v-model="cellphone" placeholder="請輸入您的手機">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email <small>(必填)</small></label>
+                            <input type="text" class="form-control" name="jobTitle" v-model="email" placeholder="請輸入您的手機">
+                        </div>
+                        <div class="form-group">
+                            <label for="lineId">Line ID <small>(選填)</small></label>
+                            <input type="text" class="form-control" name="lineId" v-model="lineId" placeholder="Line ID">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12 col-md-8">
+                    <table ref="signatureHTML" cellpadding="0" cellspacing="0" style="border-spacing:0px;border-collapse:collapse;background-color:transparent;color:rgb(68,68,68);width:480px;font-size:10pt;font-family:Arial,sans-serif;line-height:normal">
+                        <tbody>
+                            <tr>
+                                <td valign="top" style="padding:10px 5px 12px;width:200px;vertical-align:top; text-align: center;">
+                                    <a href="https://www.pressplay.cc/" style="background-color:transparent;color:rgb(51,122,183);text-decoration:none" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://www.pressplay.cc/&source=gmail&ust=1604998938459000&usg=AFQjCNHVnmlX54D2nu2IOsShQk63lWr96w">
+                                    <img border="0"
+                                        alt="Logo"
+                                        style="width: initial; height: 32px"
+                                        :src="groupSelector[group].img" style="border:0px;vertical-align:middle;width:141px;height:auto" class="CToWUd">
+                                    </a>
+                                </td>
+
+                                <td style="padding:6px 0px;width:320px">
+                                    <table cellpadding="0" cellspacing="0" style="border-spacing:0px;border-collapse:collapse;background-color:transparent">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding:0px;font-size:12pt;font-family:Arial,sans-serif;font-weight:bold;color:rgb(61,60,63)">
+                                                    <span style="font-family:Verdana,sans-serif;color:rgb(15,31,100)">{{ name }}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0px 0px 11px;font-size:10pt;font-family:Arial,sans-serif;color:rgb(61,60,63)">
+                                                    <span style="font-family:Verdana,sans-serif;color:rgb(15,31,100)">{{ jobTitle }}</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0px;font-size:10pt;font-family:Arial,sans-serif;color:rgb(155,155,155)">
+                                                    <span style="font-family:Verdana,sans-serif;color:rgb(15,31,100)">phone: (02) 2558-8355 <span v-if="!!extension">#{{ extension }}</span></span>
+                                                </td>
+                                            </tr>
+                                            <tr v-if="cellphone">
+                                                <td style="padding:0px;font-size:10pt;font-family:Arial,sans-serif;color:rgb(155,155,155)">
+                                                    <span style="font-family:Verdana,sans-serif;color:rgb(15,31,100)">
+                                                        cellphone:
+                                                        <a :href="`tel:${cellphone}`" style="font-family:Verdana,sans-serif;color:rgb(15,31,100)">{{ cellphone }}</a>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0px;font-size:10pt;font-family:Arial,sans-serif;color:rgb(155,155,155)">
+                                                    <span style="font-family:Verdana,sans-serif;color:rgb(15,31,100)">email: </span>
+                                                    <span style="color:rgb(23,147,210)">
+                                                        <span style="font-family:Verdana,sans-serif;color:rgb(244,170,16)">{{ email }}</span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr v-if="lineId">
+                                                <td style="padding:0px;font-size:10pt;font-family:Arial,sans-serif;color:rgb(155,155,155)">
+                                                    <span style="font-family:Verdana,sans-serif;color:rgb(15,31,100)">
+                                                        Line ID:
+                                                        <a :href="`tel:${cellphone}`" style="font-family:Verdana,sans-serif;color:rgb(15,31,100)">{{ lineId }}</a>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding:0px;font-size:10pt;font-family:Arial,sans-serif;color:rgb(155,155,155)">
+                                                    <span style="font-family:Verdana,sans-serif;color:rgb(15,31,100)">103 台北市大同區西寧北路62-5號2樓</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr />
+
+            <h3 class="mt-3 mb-3">2. 點擊複製簽名檔</h3>
+            <button class="btn btn-primary share-url-clipboard-btn" v-on:click="copy">複製</button>
+
+            <hr />
+
+            <h3 class="mt-3 mb-3">3. 至 GMail 設定頁面</h3>
+
+            <p>點擊右側齒輪 <a target="_blank" href="https://mail.google.com/mail/u/0/#settings/general" class="btn btn-warning"> <i class="fas fa-cog"></i> </a> 進入 GMail 設定頁面</p>
+
+            <h4 class="pt-2 pb-2">或</h4>
+
+            <p>點擊 GMail 主畫面右上角 <b class="text-primary">齒輪圖示</b>，並點擊 <b class="text-primary">查看所有設定</b></p>
+            <div><img src="./dist/img/pressplay/setting.png"></div>
+
+            <hr />
+
+            <h3 class="mt-3 mb-3">4. 設定您的簽名檔</h3>
+
+            <h5 class="mt-3 mb-3">a. 在 ＧMail 設定頁面中找到簽名設定，並點擊 <b class="text-primary"><i class="fas fa-plus"></i> 建立新標籤</b> </h5>
+            <div><img src="./dist/img/pressplay/step1.png"></div>
+
+
+            <h5 class="mt-3 mb-3">b. 新增一個簽名</h5>
+            <div><img src="./dist/img/pressplay/step2.png"></div>
+
+            <h5 class="mt-3 mb-3">c. 點擊空白區塊，ctrl + v (cmd + v) 貼上您的簽名檔</h5>
+            <div><img src="./dist/img/pressplay/step3.png"></div>
+            <div><img src="./dist/img/pressplay/step3-1.png"></div>
+
+
+            <h5 class="mt-3 mb-3">d. 將簽名檔設為預設值</h5>
+            <div><img src="./dist/img/pressplay/step4.png"></div>
+
+
+            <h5 class="mt-3 mb-3">e. 儲存設定</h5>
+            <div><img src="./dist/img/pressplay/step5.png"></div>
+
+            <hr />
+            <h3 class="mt-3 mb-3">5. 完成！</h3>
+            <p>恭喜你完成您的簽名檔，趕快找一個人來測試寄信看看吧，如果不知道要寄給誰，歡迎寄給 <a href="mailto:gg@pressplay.cc">gg@pressplay.cc</a></p>
+
+        </div>
+
+    </div>
+    <script src="./dist/js/app/index.bundle.js"></script>
+</body>
+</html>
