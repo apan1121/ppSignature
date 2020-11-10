@@ -37,6 +37,11 @@ const Page = new Vue({
                     name: '品牌影響力 Next',
                     img: 'https://static.pressplay.cc/static/uploads/ics/20201109/5fa919920caec20201109182730.png',
                 },
+                pressplay: {
+                    name: 'PressPlay',
+                    img: 'https://static.pressplay.cc/static/uploads/ics/20201110/5faa0c0c00a0a20201110114204.png',
+                },
+
             },
             group: 'connect',
             name: 'GG Lee',
