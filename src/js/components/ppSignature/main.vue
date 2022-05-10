@@ -42,6 +42,13 @@
                         >
                     </div>
                     <div v-if="cardInfo.group !== 'hk'" class="form-group">
+                        <label for="showPhone">公司號碼</label>
+                        <select v-model="cardInfo.showPhone" class="form-control">
+                            <option :value="true">顯示</option>
+                            <option :value="false">不顯示</option>
+                        </select>
+                    </div>
+                    <div v-if="cardInfo.group !== 'hk'" class="form-group">
                         <label for="extension">分機號碼 <small>(選填)</small></label>
                         <input v-model="cardInfo.extension" type="text" class="form-control"
                             name="extension" placeholder="請輸入您的分機號碼"
@@ -110,7 +117,7 @@
                                                 <span style="font-family:Verdana,sans-serif;color:#061733">{{ cardInfo.department }}</span>
                                             </td>
                                         </tr>
-                                        <tr v-if="cardInfo.group !== 'hk'">
+                                        <tr v-if="cardInfo.group !== 'hk' && cardInfo.showPhone">
                                             <td style="padding:0px;font-size:10pt;font-family:Arial,sans-serif;color:rgb(155,155,155)">
                                                 <span style="font-family:Verdana,sans-serif;color:#061733">phone: <a :href="`tel:${phone}`" style="font-family:Verdana,sans-serif;color:#061733">{{ phone }}</a></span></span>
                                             </td>
@@ -304,6 +311,7 @@ export default {
                 department: '',
                 name: 'GG Lee',
                 jobTitle: 'Art Director',
+                showPhone: true,
                 extension: '',
                 cellphone: '',
                 email: '@pressplay.cc',
