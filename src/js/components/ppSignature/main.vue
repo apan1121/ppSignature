@@ -41,7 +41,7 @@
                             name="jobTitle" placeholder="請輸入您的完整職稱"
                         >
                     </div>
-                    <div class="form-group">
+                    <div v-if="cardInfo.group !== 'hk'" class="form-group">
                         <label for="extension">分機號碼 <small>(選填)</small></label>
                         <input v-model="cardInfo.extension" type="text" class="form-control"
                             name="extension" placeholder="請輸入您的分機號碼"
@@ -110,9 +110,9 @@
                                                 <span style="font-family:Verdana,sans-serif;color:#061733">{{ cardInfo.department }}</span>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr v-if="cardInfo.group !== 'hk'">
                                             <td style="padding:0px;font-size:10pt;font-family:Arial,sans-serif;color:rgb(155,155,155)">
-                                                <span style="font-family:Verdana,sans-serif;color:#061733">phone: (02) 2558-8355 <span v-if="!!cardInfo.extension">#{{ cardInfo.extension }}</span></span>
+                                                <span style="font-family:Verdana,sans-serif;color:#061733">phone: <a :href="`tel:${phone}`" style="font-family:Verdana,sans-serif;color:#061733">{{ phone }}</a></span></span>
                                             </td>
                                         </tr>
                                         <tr v-if="cardInfo.cellphone">
@@ -127,7 +127,7 @@
                                             <td style="padding:0px;font-size:10pt;font-family:Arial,sans-serif;color:rgb(155,155,155)">
                                                 <span style="font-family:Verdana,sans-serif;color:#061733">email: </span>
                                                 <span style="color:rgb(23,147,210)">
-                                                    <span style="font-family:Verdana,sans-serif;color:rgb(244,170,16)">{{ cardInfo.email }}</span>
+                                                    <a :href="`mailto:${cardInfo.email}`" style="font-family:Verdana,sans-serif;color:rgb(244,170,16)">{{ cardInfo.email }}</a>
                                                 </span>
                                             </td>
                                         </tr>
@@ -141,7 +141,16 @@
                                         </tr>
                                         <tr>
                                             <td style="padding:0px;font-size:10pt;font-family:Arial,sans-serif;color:rgb(155,155,155)">
-                                                <span style="font-family:Verdana,sans-serif;color:#061733">103 台北市大同區西寧北路62-5號2樓</span>
+                                                <span style="font-family:Verdana,sans-serif;color:#061733">
+                                                    <template v-if="cardInfo.group === 'hk'">
+                                                        Room F, 9/F, Tower A, Capital Tower, 38 Wai Yip Street, Kowloon, Hong Kong
+                                                        <br>
+                                                        香港九龍偉業街38號富臨中心A塔9F
+                                                    </template>
+                                                    <template v-else>
+                                                        103 台北市大同區西寧北路62-5號2樓
+                                                    </template>
+                                                </span>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -281,10 +290,10 @@ export default {
                     name: 'PressPlay HK',
                     img: 'https://static.pressplay.cc/static/uploads/ics/ppSignature/PPLogo_HK.png',
                     department: [
-                        'Connect',
-                        'Talent',
-                        'Next Master',
-                        'Brand',
+                        '經紀部 Talent',
+                        '課程部 Next Master',
+                        '品牌部 Brand',
+                        '內容行銷部 Connect',
                     ],
                 },
             },
@@ -304,6 +313,14 @@ export default {
     computed: {
         ...mapGetters([
         ]),
+        phone(){
+            const that = this;
+            let phone = '(02) 2558-8355';
+            if (!!that.cardInfo.extension) {
+                phone = `${phone} #${that.cardInfo.extension}`;
+            }
+            return phone;
+        },
     },
     watch: {
         'cardInfo.group': function(newVal, oldVal){
