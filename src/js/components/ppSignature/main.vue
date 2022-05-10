@@ -290,6 +290,7 @@ export default {
                     name: 'PressPlay HK',
                     img: 'https://static.pressplay.cc/static/uploads/ics/ppSignature/PPLogo_HK.png',
                     department: [
+                        '影響力品牌事業群 ',
                         '經紀部 Talent',
                         '課程部 Next Master',
                         '品牌部 Brand',
