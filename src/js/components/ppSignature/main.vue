@@ -150,9 +150,9 @@
                                             <td style="padding:0px;font-size:10pt;font-family:Arial,sans-serif;color:rgb(155,155,155)">
                                                 <span style="font-family:Verdana,sans-serif;color:#061733">
                                                     <template v-if="cardInfo.group === 'hk'">
-                                                        Room F, 9/F, Tower A, Capital Tower, 38 Wai Yip Street, Kowloon, Hong Kong
+                                                        Unit 11, 15/F., Eastern Harbour Centre  No. 28 Hoi Chak Street, Quarry Bay, Hong Kong
                                                         <br>
-                                                        香港九龍偉業街38號富臨中心A塔9F
+                                                        香港鰂魚涌海澤街28號東港中心15樓11室
                                                     </template>
                                                     <template v-else>
                                                         103 台北市大同區西寧北路62-5號2樓
